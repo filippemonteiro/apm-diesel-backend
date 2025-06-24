@@ -1,0 +1,27 @@
+::2468 -------------------------------------------------------------------------------------
+
+CHURRASQUEIRA A BAFO PORQUINHO Nº 37X23 - PRETO CRAQUEADO - 6
+CHURRASQUEIRA A BAFO PORQUINHO Nº 37X23- POLIDA - 5
+
+FRIGIDEIRA Nº 18 - POLIDA - 5
+FRIGIDEIRA Nº 18 - PRETO CRAQUEADA - 6
+
+::2469 -------------------------------------------------------------------------------------
+
+CHURRASQUEIRA A BAFO PORQUINHO Nº 37X23 - LARANJA - 10
+CHURRASQUEIRA A BAFO PORQUINHO Nº 37X23 - PRETO CRAQUEADO - 3
+CHURRASQUEIRA A BAFO PORQUINHO Nº 37X23- POLIDA - 2
+
+
+::TOTAIS: -------------------------------------------------------------------------------------
+
+BASE CHURRASQUEIRA PORQUINHO - 26 - 5 = 21
+TAMPA CHURRASQUEIRA PORQUINHO - 26 - 4 = 22
+
+FRIGIDEIRA Nº 18 - 11
+
+
+ESTOQUES
+BASE CHURRASQUEIRA PORQUINHO 5
+TAMPA CHURRASQUEIRA PORQUINHO 4
+FRIGIDEIRA Nº 18 2

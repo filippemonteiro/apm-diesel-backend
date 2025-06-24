@@ -1,0 +1,420 @@
+CORREÇÃO:
+
+1. NAO MOSTROU A VISITA DO ADRIANO - COMERCIAL DE ALIMENTOS
+FEITO - 2. EXIBIR OBSERVAÇÃO NO RELATORIOS DE ULTIMAS VENDAS.
+3. RELATORIOS DE PRODUTOS MAIS VENDIDOS - 
+FEITO - 3.1 COLUNA COM VALOR TOTAL DA VENDA.
+FEITO - 3.2 COLOCAR POR ORDEM ALFABETICA COM CRESCENTE E DECRESCENTE.
+
+01/08/2022
+
+FEITO - 1. ESTÁ EXIBINDO TODOS OS CLIENTES EM VISITA.
+FEITO - 2. APOS CADASTRO DE VISITA, NO RELATORIO EXIBE QUE O CLIENTE NAO RECEBEU VISITA.
+3. 
+
+-------------------------------------------------
+20/07/2022
+
+1. ENVIAR FLUXO DE VISITA PARA D. RONIELLE.
+2. TROCAR O LAYOUT DO APP.
+FEITO - 3. SUBI A CONSULTA POR CODIGO.
+FEITO - 4. COLOCAR COLUNA DE CARGO NO COLABORADOR.
+FEITO - 5. DEVE PESQUISAR PELO CARGO EM COLABORADOR.
+6. 
+--------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------- MÓDULO DE PRODUÇÃO: -------------------------------------- 
+
+-------------------------------------------------------------------
+FLUXO: CADA COLABORADOR PRODUZ SUA PEÇA, AO FINALIZAR.
+O SETOR DEVE IR CONFERIR AS PEÇAS PRODUZIDAS E DEVE LANÇAR NO SISTEMA.
+-------------------------------------------------------------------
+ENTRADAS DE PRODUÇÃO:
+-------------------------------------------------------------------
+ENTRADA EM ESTOQUE:
+- NOME DO COLABORADOR, PRODUTO E QUANTIDADE, STATUS, STATUS_REPARACAO
+-------------------------------------------------------------------
+ALUMINIO --------
+MOLDAÇÃO
+POLIMENTO OU LIXAMENTO
+POLIMENTO > MONTAGEM
+LIXAMENTOS > PINTURA > MONTAGEM.
+-----------------------------------------------
+GRELHA -------- FERRO - PESO
+DOIS TIPOS DE FERRO - GROSO E FINALIZADO
+MOLDAR
+SOLDAR
+CROMAR
+MONTAR
+
+-------------------------------------------------------------------
+- DEVE LANÇAR PEÇAS PERDIDAS.
+- DEVE TER UMA TELA PARA LANÇAR PEDAS.
+SELECIONAR O PRODUTO E A FASE E FICAR NO HISTORICO PARA NO PROXIMO MES 
+INICIAR COM SALDO NEGATIVO. CAMPO DA AVARIA.
+-------------------------------------------------------------------
+- STATUS: CRIAÇÃO, REPARAÇÃO DE CRIAÇÃO, REPAÇÃO DE ESTOQUE.
+- PEÇA PODE IR PARA O CONSERTO. VOLTA AO STATUS.
+
+1. O SITEMA DEVE CONTAR EM ESTOQUE O STATUS DE CRIAÇÃO E REPARAÇÃO DE ESTOQUE.
+2. A COMISSÃO DO VENDEDOR DEVE CONTAR NO STATUS DE CRIAÇÃO. APENAS
+3. PEÇAS DE REPARAÇÃO > DEVE CONTER UMA TELA DE TROCA DE CLIENTE.
+ONDE SELECIONA PRODUTO, CLIENTE E PEDIDO.
+-------------------------------------------------
+
+COMISSÕES:
+
+MOLDAÇÃO X PRODUTO X COMISSÃO:
+LIXAMENTO X PRODUTO X COMISSÃO:
+
+-------------------------------------------------
+
+1. RELATORIOS DE ESTOQUE X PREÇO DE CUSTO.
+2. RELATORIOS DE PRODUÇÃO X PREÇO D ECUSTO.
+3. DEVE SER LANÇADO AS PERDAS 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------
+12/07/2022
+
+FEITO - 1. REMOVER O BTN DE EDITAR E EXCLUIR O CLIENTE.
+FEITO - 2. LISTAR APENAS CLIENTES DO VENDEDOR EM ABRIR PEDIDO.
+FEITO - 3. PODER GERAR PDF DE TABELA DE PREÇOS.
+FEITO - 4. TELEFONE COM MAIS DE UM numero
+FEITO - 6. ALTERAR FORMA DE PAGAMENTO NO APP QUANDO O PEDIDO ESTIVER PENDENTE.
+FEITO - 7. NAO EXIBIR TODOS OS PRODUTOS NA TABELA DE PREÇOS
+
+-------------------------------------------------
+11/07/2022
+
+1. RELATORIOS DE ULTIMAS VENDAS
+
+FEITO - SELECIONAR TODOS
+FEITO - COLOCAR POR ORDEM CRESCENTE E DECRESCENTE.
+FEUTO - COLOCAR BOTÃO DE GERAR PDF.
+
+2. APP - PARLUMIN
+
+ - GERAR PDF DE TABELA DE PREÇOS
+ - GERAR PDF DE RELATÓRIOS
+ - TESTAR FILTROS DE RELATÓRIOS
+ - NÃO EXIBE O NOME DO PRODUTO NOS PEDIDOS.
+
+-------------------------------------------------
+30/06/2022
+
+FEITO - 1. FAZER RELATORIOS DE PRODUTOS MAIS VENDIDOS.
+FEITO - FILTROS: 
+FEITO    - ORDEM CRESCENTE OU DESCRECENTE.
+FEITO    - DATA INICIO E FIM
+FEITO    - CNPJ DO CLIENTE
+FEITO    - VENDEDOR
+FEITO    - BAIRRO
+FEITO    - CIDADE
+FEITO    - ESTADO
+
+-------------------------------------------------
+
+FEITO - 2. RELATORIO DAS ULTIMAS VENDAS - FILTRO DE ORDEM CRESCENTE E DECRESCENTE. - ULTIMO PEDIDO E ULTIMA 
+FEITO   3. RELATORIO DE ROMANEIRO
+FEITO   - CAMPO OBSERVACAO - NAO DEVE SER EXIBIDO.
+FEITO   - O MOTORISTA É QUEM DEVE COLOCAR A MAO.
+FEITO   - DEIXAR VIM O RETANGULO BRANCO.
+
+FEITO - 4. APP
+FEITO - RELATORIOS DE VENDAS
+FEITO - ULTIMAS VENDAS
+FEITO - CLIENTES
+FEITO - RELATORIOS DE PRODUTOS
+
+FEITO - 5. BLOQUEAR O PEDIDO QUANDO FOR FINALIZADO - PARA NAO SER ALTERADO NADA.
+
+
+15/06/2022
+------------------------------------------------------
+
+FEITO - 1. A LOGOMARCA TEM QUE TIRAR O ALUMINIO.
+FEITO - 2. TESTAR OS FILTROS NO PAINEL.
+FEITO - 3. RELATORIO DE VENDAS NAO BUSCA PELO VENDEDOR.
+FEITO - 4. RELATORIO AGRUPADO - NAO ESTÁ EM ORDEM ALFABETICA
+FEITO - 5. CADASTRO CLIENTE - O CPF NAO TÁ EXIBINDO
+
+FEITO - 6. FAZER RELATORIO DO CLIENTE QUE NAO COMPROU E COM A DATA DA ULTIMA VISITA.
+    FILTRAR PELO VENDEDOR
+    QUE NAO COMPROU E NEM FEZ CHECKIN
+7. VER APP - AGUARDAR A D. RONIELLE.
+
+FEITO - 8. COLOCAR A POSSIBILIDADE DE ALTERAR O VENDEDOR DO PEDIDO. E COLOCAR O PEDIDO PARA OUTRO VENDEDOR.
+FEITO - 9. ACRESCENTAR O CNPJ DA PARLUMIN NO CABEÇALHO
+10. LINK - PEDIDO.
+FEITO - 11. GERAR TODOS OS PEDIDOS EM RELATORIOS
+FEITO - 12. COLOCAR FILTROS NO PEDIDO E COM CAMPO DE CODIGO DO PEDIDO. EM REALTORIOS  DE PEDIDOS E AGRUPADOS. - STATUS E CNPJ DE CLIENTE.
+
+
+FEITO - 1. REMOVER PREÇO DO PRODUTO
+2. PODER GERAR PDF DE PRODUTOS COM VALORES.
+3. COLOCAR AS MESMAS BUSCAS NO APP DO SITE.
+4. RELATORIO DE VISITAS E VENDAS DO CLIENTE.
+
+-------------------------------------------------------------------------------
+
+FEITO - 1. BUG NOS STATUS DO GRID;
+FEITO - 2. DEIXAR O APROVAR EXIBINDO
+
+-------------------------------------------------------------------------------
+
+FEITO - 1. CRIAR CAMPO NCM EM PRODUTOS.
+FEITO - 2. ACRESCENTAR TIPO DE FRENTE EM PEDIDO.
+FEITO - 3. ALTERAR O EMAIL PARA COMERCIAL.PARLUMIN@GMAIL.COM
+
+4. TIRAR O NOME ALUMINIO DA LOGO.
+FEITO - 5. BUSCAR POR CNPJ EM CLIENTE AO ABRIR PEDIDO. COLOCAR A BUSCAR IGUAL A DO DASHBOARD
+
+FEITO - 6. SAIR FORMA DE PAGAMENTO EM ROMANEIO.
+FEITO - 7. ACRESCENTAR O TIPO DE PAGAMENTO EM ROMANEIO
+FEITO - 8. ACRESCENTAR O PESO EM ROMANEIO
+FEITO - 9. ACRESCENTAR O VALOR TOTAL E O PESO TOTAL. EM ROMANEIO
+
+-------------------------------------------------------------------------------
+
+ÚLTIMAS - APP
+
+FEITO - 1. ICONE DE PDF PARA GERAÇÃO
+FEITO - 3. PEDIDO: TIPO PEDIDO E TIPO ORÇAMENTO.
+FEITO - 4. NAO DEVE MOSTRAR ORÇAMENTO NO SITE.
+FEITO - 5. FILTRAR POR VENDEDOR, UF, MUNICIPIO E POR VENDEDOR.
+FEITO - 6. IMAGEM DO PRODUTO
+
+7. AO FINALIZAR O PEDIDO DEVE CRIAR UMA VISITA.
+8. LAT E LNG OBRIGATORIO AO ABRIR PEDIDO CHECKIN E  AO FECHAR CHECKOUT.
+
+-------------------------------------------------------------------------------
+ÚLTIMAS - SISTEMA
+
+FEITO - 2. CADASTRAR A COMISSAO PELO VENDEDOR - FILTRO VENDAS POR PERIODO DO VENDEDOR.
+FEITO - 3. CLIENTE NAO APARECE INATIVO EM DASHBOARD.
+FEITO - 4. CLIENTE QUE O ADRIANO CADASTROU FOI PARA O VENDEDOR ADRIANO. DANDO ERRO.
+FEITO - 5. O USUARIO DEVE SE VINCULADO AO COLABORADOR PARA LISTAR OS CLIENTES.
+FEITO - 8. PESQUISAR CLIENTE POR BAIRRO.
+
+------- FALTANDO -------
+
+1. RELATORIOS DE COMISSOES. 
+2. TEMPO DE UM PEDIDO PARA O OUTRO.
+5. RELATORIO DO CLIENTE SEM VENDAS. - PODER FILTRAR POR DIA E GERAR PDF
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+FEITO - 1. TELA DE ACESSO PARA VER TODOS OS VENDEDORES E VENDAS
+FEITO - 2. TELA DE PEDIDOS DE TODOS OS VENDEDORES
+FEITO - 3. FILTROS POR DIA, ONTEM, SEMANA, MES.
+FEITO - 4. CONSULTAR PELO NOME DO VENDEDORES
+FEITO - 5. CONSULTAR PELOS STATUS
+
+6. NO FINAL DA CONSULTA DEVE TER O TOTAL DO VALOR
+
+FEITO - 7. PODER OCULTAR VALOR TOTAL DE AGRUPADOS E PODER TIRAR.
+FEITO - 8. COLOCAR OBRIGATORIEDADE DE TIPO DE PAGAMENTO
+FEITO - 9. LISTAR HISTORICOS - NAO TA FUNCIONANDO.
+
+10. LAT E LNG
+11. SUBMETER A FOTO DO PRODUTO
+12. GERAR PDF DO PEDIDOS
+13. COLOCAR LOGOMARCA NO PDF
+
+FEITO - 14. COLOCAR TIPO DE FRETE. CIF E FOB AO FECHAR O PEDIDO.
+
+15. COLOCAR DATA DA PROXIMA VISITA NO CHECKOUT. NAO OBRIGATORIO.
+
+FEITO - 16. COLOCAR PAGINAÇÃO EM TABELA DE PREÇOS DE PRODUTOS.
+FEITO - 17. COLOCAR OS TRES TELEFONES NO PEDIDO.
+FEITO - 18. PESQUISAR CLIENTE POR RAZAO SOCIAL, POR VENDEDOR, POR CPF CNPJ, CIDADE E ESTADO.
+
+19. GERAR TABLE DE PRODUTOS COM VALORES.
+
+12/05/2022
+
+FEITO - 1. TIRAR O PONTO DO TELEFONE NO CADASTRO DO CLIENTE.
+2. BUSCAR PELO CNPJ - CADASTRO DE CLIENTE - BUSCAR PELA SEFAZ
+3. COLOCAR UM BOTÃO DE GERAR O PDF PARA GERAR AS TABELAS DE PREÇOS.
+4. GERAR PDF DO PEDIDO.
+5. GERAR PDF DO AGRUPAMENTO
+FEITO - 6. RELATORIOS
+FEITO - 7. TIPO DE FRETE PARA O SISTEMA.PARLUMIN.COM.BR E NO APP.
+FEITO - 8. TIRAR A OBRIGATORIEDADE DO FRETE
+FEITO - 9. NAO TA APARECENDO O HISTORICO - PASSO A PASSO.
+FEITO - 10. NO ARQUIVO DO PEDIDO - DEVE APARECER TODOS OS TELEFONES DO CLIENTE
+FEITO - 11. FORMA DE PAGAMENTO NAO TA APARECENDO NO PEDIDO.
+FEITO - 12. O NOME DO VENDEDOR NAO TA PUXANDO NO PEDIDO
+FEITO - 13. PESO TOTAL NAO TA APARECENDO.
+FEITO - 14. O EMAIL E A LOGOMARCA DA EMPRESA NA VISUALIZAÇÃO DO PEDIDO.
+FEITO - 15. QUANDO O DESCONTO DESCRIMINADO PELO VENDEDOR FOR MAIOR QUE O DESCONTO PELA FORMA DE PAGAMENTO.
+O SISTEMA DEVE AVISAR PARA SER APROVADO.
+FEITO - 16. CAMPO DESCONTO, COLOCAR COMO OBRIGATÓRIO.
+FEITO - 17. VER A BUSCA DE CLIENTES E COLOCAR O CAMPO CNPJ - TESTAR ESSE PONTO.
+
+
+TAREFAS DE SISTEMAS:
+1. REMOVER OS PONTOS DO CNPJ AO PESQUISAR.
+
+
+
+
+
+SELECT `cli`.*,
+(
+    SELECT count(1) 
+    FROM pedidos
+      WHERE cliente_id = cli.id
+      GROUP BY cliente_id) AS quant_pedidos
+   FROM `clients` AS `cli`
+   INNER JOIN `colaboradors` AS `c` ON `c`.`id` = `cli`.`vendedor_id`
+   LEFT JOIN `pedidos` AS `p` ON `p`.`cliente_id` = `cli`.`id`
+   LEFT JOIN `visitas` AS `v` ON `v`.`cliente_id` = `cli`.`id`
+   GROUP BY 
+   `id`,
+    `razao_social`,
+    `nome_fantasia`,
+    `cnpj`,
+    `cpf`,
+    `logradouro`,
+    `numero`,
+    `complemento`,
+    `bairro`,
+    `cidade`,
+    `uf`,
+    `cep`,
+    `fone`,
+    `celular`,
+    `email`,
+    `vendedor_id`,
+    `tabela_id`,
+    `telefone`,
+    `observacao`,
+    `situacao`,
+    `nome_contato`,
+    `email_contato`,
+    `telefone_contato`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   (
+    SELECT count(1) 
+    FROM pedidos
+      WHERE cliente_id = cli.id
+      GROUP BY cliente_id) AS quant_pedidos
+
+
+SELECT `cli`.*,
+    (
+        SELECT clit.*
+        FROM (
+            SELECT cli.*
+            FROM `clients` AS `cli`
+                INNER JOIN `colaboradors` AS `c` ON `c`.`id` = `cli`.`vendedor_id`
+                LEFT JOIN `pedidos` AS `p` ON `p`.`cliente_id` = `cli`.`id`
+                LEFT JOIN `visitas` AS `v` ON `v`.`cliente_id` = `cli`.`id`
+            GROUP BY 
+            `id`,
+            `razao_social`,
+            `nome_fantasia`,
+            `cnpj`,
+            `cpf`,
+            `logradouro`,
+            `numero`,
+            `complemento`,
+            `bairro`,
+            `cidade`,
+            `uf`,
+            `cep`,
+            `fone`,
+            `celular`,
+            `email`,
+            `vendedor_id`,
+            `tabela_id`,
+            `telefone`,
+            `observacao`,
+            `situacao`,
+            `nome_contato`,
+            `email_contato`,
+            `telefone_contato`
+        ) as clit
+    ) as ped
+   
+
+SELECT count(1) 
+FROM pedidos
+WHERE cliente_id = cli.id
+GROUP BY cliente_id
+
+
+
+
+
+
+
+
+
+
+
+   GROUP BY 
+   `id`,
+    `razao_social`,
+    `nome_fantasia`,
+    `cnpj`,
+    `cpf`,
+    `logradouro`,
+    `numero`,
+    `complemento`,
+    `bairro`,
+    `cidade`,
+    `uf`,
+    `cep`,
+    `fone`,
+    `celular`,
+    `email`,
+    `vendedor_id`,
+    `tabela_id`,
+    `telefone`,
+    `observacao`,
+    `situacao`,
+    `nome_contato`,
+    `email_contato`,
+    `telefone_contato`
