@@ -12,11 +12,7 @@ class AbstractStorage {
     public function __construct() {
         $this->client = new S3Client([
             'version' => 'latest',
-            'region' => 'us-east-2',
-            'credentials' => [
-                'key'    => 'AKIA5LXJBMLAFLXAOQNX',
-                'secret' => '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'
-            ]
+            'region' => 'us-east-2'
         ]);
     }
 
