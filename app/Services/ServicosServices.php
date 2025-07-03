@@ -28,13 +28,13 @@ class ServicosServices extends BaseServices
             ->when($params, function($query, $params) {
                 if(isset($params['search'])) {
                     $query->where('tipo', 'like', "%{$params['search']}%")
-                          ->orWhereHas('motorista', function($q) use ($params) {
-                              $q->where('name', 'like', "%{$params['search']}%");
-                          })
-                          ->orWhereHas('veiculo', function($q) use ($params) {
-                              $q->where('marca', 'like', "%{$params['search']}%")
+                        ->orWhereHas('motorista', function($q) use ($params) {
+                            $q->where('name', 'like', "%{$params['search']}%");
+                        })
+                        ->orWhereHas('veiculo', function($q) use ($params) {
+                            $q->where('marca', 'like', "%{$params['search']}%")
                                 ->orWhere('modelo', 'like', "%{$params['search']}%");
-                          });
+                        });
                 }
 
                 if(isset($params['tipo'])) {

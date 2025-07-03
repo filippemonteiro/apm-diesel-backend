@@ -28,8 +28,8 @@ class VeiculosServices extends BaseServices
                 if(isset($params['search'])) {
                     $query->where(function($q) use ($params) {
                         $q->where('marca', 'like', "%{$params['search']}%")
-                          ->orWhere('modelo', 'like', "%{$params['search']}%")
-                          ->orWhere('cor', 'like', "%{$params['search']}%");
+                        ->orWhere('modelo', 'like', "%{$params['search']}%")
+                        ->orWhere('cor', 'like', "%{$params['search']}%");
                     });
                 }
                 return $query;
@@ -52,7 +52,7 @@ class VeiculosServices extends BaseServices
     public function show($id) 
     {
         $data = $this->model->with(['reservas.motorista', 'servicos'])
-                           ->find($id);
+                        ->find($id);
         return response()->json(['data' => $data]);
     }
 

@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
 class CreateServicosTable extends Migration
 {
     /**
@@ -11,7 +15,7 @@ class CreateServicosTable extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo'); // Campo como string conforme especificação
+            $table->string('tipo');
             $table->date('data');
             $table->time('hora');
             $table->text('observacao')->nullable();

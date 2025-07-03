@@ -31,7 +31,7 @@ class ReservasServices extends BaseServices
                         $q->where('name', 'like', "%{$params['search']}%");
                     })->orWhereHas('veiculo', function($q) use ($params) {
                         $q->where('marca', 'like', "%{$params['search']}%")
-                          ->orWhere('modelo', 'like', "%{$params['search']}%");
+                        ->orWhere('modelo', 'like', "%{$params['search']}%");
                     });
                 }
 
