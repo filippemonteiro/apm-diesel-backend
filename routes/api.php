@@ -28,41 +28,24 @@ Route::get('cidades/options', 'CidadesController@options');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
-    Route::get('/relatorios', 'RelatoriosController@index');    
-    
-    Route::get('trajetos/:rota_id', "TrajetosController@listarPorRotas");
-    // Options
-    Route::get('users/options', "UsersController@options");
-    Route::get('cargos/options', 'CargosController@options');
-    Route::get('servidores/options', 'ServidoresController@options');
-    Route::get('carros/options', 'CarrosController@options');
-    Route::get('horarios/options', 'HorariosController@options');
-    Route::get('rotas/options', 'RotasController@options');
-    Route::get('tipos-chamados/options', 'TiposChamadosController@options');
-    
-    Route::get('coletas/abertas', 'ColetasController@getListaAbertas');
-    Route::post('logout-user', 'AuthController@desconectDevice');
-    
-    // Crud Rest API
-    Route::get('dashboard/totais', "DashboardController@totais");
+// Options para dropdowns/selects
+Route::get('veiculos/options', 'VeiculosController@options');
+Route::get('tipos-servicos/options', 'TiposServicosController@options');
 
-    // RESOURCES
-    Route::resource('horarios-rotas', 'HorariosRotasController');
-    Route::resource('tipos-chamados', 'TiposChamadosController');
-    Route::resource('chamados', 'ChamadosController');
-    Route::resource('atendimentos', 'AtendimentosController');
-    Route::resource('coletas', 'ColetasController');
-    Route::resource('trajetos', 'TrajetosController');
-    Route::resource('estados', 'EstadosController');
-    Route::resource('cidades', 'CidadesController');
-    Route::resource('users', 'UsersController');
-    Route::resource('cargos', 'CargosController');
-    Route::resource('servidores', 'ServidoresController');
-    Route::resource('horarios', 'HorariosController');
-    Route::resource('carros', 'CarrosController');
-    Route::resource('rotas', 'RotasController');
-    Route::resource('rotas-itens', 'RotasItensController');
-    Route::resource('permissoes', 'PermissoesController');
+// Rotas específicas para Reservas
+Route::get('reservas/motorista/{motoristaId}', 'ReservasController@porMotorista');
+Route::get('reservas/veiculo/{veiculoId}', 'ReservasController@porVeiculo');
+
+// Rotas específicas para Serviços
+Route::get('servicos/tipo/{tipo}', 'ServicosController@porTipo');
+Route::get('servicos/motorista/{motoristaId}', 'ServicosController@porMotorista');
+Route::get('servicos/veiculo/{veiculoId}', 'ServicosController@porVeiculo');
+
+// CRUD Resources
+Route::resource('veiculos', 'VeiculosController');
+Route::resource('tipos-servicos', 'TiposServicosController');
+Route::resource('reservas', 'ReservasController');
+Route::resource('servicos', 'ServicosController');
 });
 
 
