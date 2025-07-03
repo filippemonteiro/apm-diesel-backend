@@ -28,6 +28,9 @@ dist/
 # JetBrains IDE
 .idea/
 
+# Environment variables
+.env
+
 # Unit test reports
 TEST*.xml
 
