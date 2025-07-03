@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use App\Models\Servico as Model;
+use App\Models\Reserva as Model;
 use Exception;
 
-class ServicosServices extends BaseServices 
+class ReservasServices extends BaseServices 
 {
     public function __construct(Model $model)
     {
         $this->model = $model;
         $this->indexOptions = [
             'value' => 'id',
-            'label' => 'tipo',
+            'label' => 'id',
         ];
-        $this->columnSearch = 'tipo';
+        $this->columnSearch = 'id';
         $this->orderBy = 'desc';
     }
 
@@ -27,18 +27,12 @@ class ServicosServices extends BaseServices
             ->with(['motorista', 'veiculo'])
             ->when($params, function($query, $params) {
                 if(isset($params['search'])) {
-                    $query->where('tipo', 'like', "%{$params['search']}%")
-                          ->orWhereHas('motorista', function($q) use ($params) {
-                              $q->where('name', 'like', "%{$params['search']}%");
-                          })
-                          ->orWhereHas('veiculo', function($q) use ($params) {
-                              $q->where('marca', 'like', "%{$params['search']}%")
-                                ->orWhere('modelo', 'like', "%{$params['search']}%");
-                          });
-                }
-
-                if(isset($params['tipo'])) {
-                    $query->where('tipo', $params['tipo']);
+                    $query->whereHas('motorista', function($q) use ($params) {
+                        $q->where('name', 'like', "%{$params['search']}%");
+                    })->orWhereHas('veiculo', function($q) use ($params) {
+                        $q->where('marca', 'like', "%{$params['search']}%")
+                          ->orWhere('modelo', 'like', "%{$params['search']}%");
+                    });
                 }
 
                 if(isset($params['motorista_id'])) {
@@ -53,15 +47,14 @@ class ServicosServices extends BaseServices
             })
             ->when($this->orderBy, function($query, $orderBy) {
                 if($orderBy === 'desc') {
-                    return $query->orderBy('data', 'desc')->orderBy('hora', 'desc');
+                    return $query->orderBy('data_hora_checkin', 'desc');
                 }
-                return $query->orderBy('data', 'asc')->orderBy('hora', 'asc');
+                return $query->orderBy('data_hora_checkin', 'asc');
             })
             ->paginate(10);
 
         foreach($data as $item) {
-            $item->valor_formatado;
-            $item->data_hora;
+            $item->duracao;
         }
 
         return $this->response($data);
@@ -75,16 +68,8 @@ class ServicosServices extends BaseServices
 
     public function beforeCreateData($data)
     {
-        if(empty($data['tipo'])) {
-            throw new Exception("O campo Tipo é obrigatório.");
-        }
-
-        if(empty($data['data'])) {
-            throw new Exception("O campo Data é obrigatório.");
-        }
-
-        if(empty($data['hora'])) {
-            throw new Exception("O campo Hora é obrigatório.");
+        if(empty($data['data_hora_checkin'])) {
+            throw new Exception("O campo Data/Hora Check-in é obrigatório.");
         }
 
         if(empty($data['motorista_id'])) {
@@ -100,16 +85,8 @@ class ServicosServices extends BaseServices
 
     public function beforeUpdateData($data)
     {
-        if(empty($data['tipo'])) {
-            throw new Exception("O campo Tipo é obrigatório.");
-        }
-
-        if(empty($data['data'])) {
-            throw new Exception("O campo Data é obrigatório.");
-        }
-
-        if(empty($data['hora'])) {
-            throw new Exception("O campo Hora é obrigatório.");
+        if(empty($data['data_hora_checkin'])) {
+            throw new Exception("O campo Data/Hora Check-in é obrigatório.");
         }
 
         if(empty($data['motorista_id'])) {

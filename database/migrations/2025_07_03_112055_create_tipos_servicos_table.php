@@ -1,0 +1,29 @@
+<?php
+
+class CreateTiposServicosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tipos_servicos', function (Blueprint $table) {
+            $table->id();
+            $table->string('descricao');
+            $table->text('observacao')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('tipos_servicos');
+    }
+}
