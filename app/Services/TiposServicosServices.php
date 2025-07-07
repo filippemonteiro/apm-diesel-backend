@@ -2,30 +2,31 @@
 
 namespace App\Services;
 
-use App\User as Model;
+use App\Models\TipoServico as Model;
 use Exception;
-use Illuminate\Support\Facades\Hash;
 
-class UsersServices extends BaseServices {
+class TiposServicosServices extends BaseServices 
+{
     public function __construct(Model $model)
     {
         $this->model = $model;
         $this->indexOptions = [
             'value' => 'id',
-            'label' => 'name',
+            'label' => 'descricao',
         ];
-        $this->columnSearch = 'name';
+        $this->columnSearch = 'descricao';
+        $this->orderBy = 'asc';
     }
 
-    public function index($request) {
+    public function index($request) 
+    {
         $params = $request->all();
         $this->user = $request->user();
         
         $data = $this->model
             ->when($params, function($query, $params) {
                 if(isset($params['search'])) {
-                    $query->where('name', 'like', "%{$params['search']}%")
-                        ->orWhere('email', 'like', "%{$params['search']}%");
+                    $query->where('descricao', 'like', "%{$params['search']}%");
                 }
                 return $query;
             })
@@ -33,7 +34,7 @@ class UsersServices extends BaseServices {
                 if($orderBy === 'desc') {
                     return $query->orderBy('id', 'desc');
                 }
-                return $query->orderBy('name', 'asc');
+                return $query->orderBy('descricao', 'asc');
             })
             ->paginate(10);
 
@@ -42,26 +43,19 @@ class UsersServices extends BaseServices {
 
     public function beforeCreateData($data)
     {
-        $userExists = Model::where('email', $data['email'])->first();
-        if($userExists) {
-            throw new Exception("E-mail já cadastrado.");
+        if(empty($data['descricao'])) {
+            throw new Exception("O campo Descrição é obrigatório.");
         }
 
-        if(isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-        
         return $data;
     }
 
     public function beforeUpdateData($data)
     {
-        if(isset($data['password']) && !empty($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            unset($data['password']);
+        if(empty($data['descricao'])) {
+            throw new Exception("O campo Descrição é obrigatório.");
         }
-        
+
         return $data;
     }
 }
