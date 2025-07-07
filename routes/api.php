@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/relatorios', 'RelatoriosController@index');    
     
     Route::get('trajetos/:rota_id', "TrajetosController@listarPorRotas");
+    
     // Options
     Route::get('users/options', "UsersController@options");
     Route::get('cargos/options', 'CargosController@options');
@@ -46,7 +47,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Crud Rest API
     Route::get('dashboard/totais', "DashboardController@totais");
 
-    // RESOURCES
+    // RESOURCES ORIGINAIS
     Route::resource('horarios-rotas', 'HorariosRotasController');
     Route::resource('tipos-chamados', 'TiposChamadosController');
     Route::resource('chamados', 'ChamadosController');
@@ -63,10 +64,29 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('rotas', 'RotasController');
     Route::resource('rotas-itens', 'RotasItensController');
     Route::resource('permissoes', 'PermissoesController');
+
+    // === SISTEMA DE VEÍCULOS ===
+    // Options para dropdowns/selects
+    Route::get('veiculos/options', 'VeiculosController@options');
+    Route::get('tipos-servicos/options', 'TiposServicosController@options');
+
+    // Rotas específicas para Reservas
+    Route::get('reservas/motorista/{motoristaId}', 'ReservasController@porMotorista');
+    Route::get('reservas/veiculo/{veiculoId}', 'ReservasController@porVeiculo');
+
+    // Rotas específicas para Serviços
+    Route::get('servicos/tipo/{tipo}', 'ServicosController@porTipo');
+    Route::get('servicos/motorista/{motoristaId}', 'ServicosController@porMotorista');
+    Route::get('servicos/veiculo/{veiculoId}', 'ServicosController@porVeiculo');
+
+    // CRUD Resources - SISTEMA DE VEÍCULOS
+    Route::resource('veiculos', 'VeiculosController');
+    Route::resource('tipos-servicos', 'TiposServicosController');
+    Route::resource('reservas', 'ReservasController');
+    Route::resource('servicos', 'ServicosController');
 });
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
