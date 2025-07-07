@@ -22,8 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             $table->string('role');
-            $table->integer('cidade_id')->nullable();
-            $table->integer('colaborador_id')->nullable();
             $table->integer('ativo')->default(1);
             
             $table->rememberToken();
