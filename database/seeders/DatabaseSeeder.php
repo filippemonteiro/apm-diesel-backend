@@ -1,7 +1,5 @@
 <?php
 
-use App\Cidades;
-use App\Estados;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

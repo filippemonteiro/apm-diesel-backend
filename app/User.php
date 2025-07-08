@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Models\Colaborador;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -94,7 +93,4 @@ class User extends Authenticatable  implements JWTSubject
          ];
     }
 
-    public function cidade() {
-        return $this->belongsTo(Cidades::class, 'cidade_id');
-    }
 }
