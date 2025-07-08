@@ -28,34 +28,9 @@ class AuthController extends Controller
             
             'password' => 'required'
         ]);
-        // $user = User::where('email', $request->email)->first();
-        $user = User::whereRaw("email = '{$request->email}' OR cpf = '{$request->email}'")->first();
 
-        // // echo '<pre>'; print_r($request); die;
-        // // Se Aluno
-        // $aluno = AlunosModel::where('cpf', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
         
-        // if(!$user && $aluno) {
-        //     $senhaAluno = substr($aluno->cpf, 0, 4).substr($aluno->cpf, -2);
-            
-        //     // echo '<pre>'; print_r($senhaAluno); die;
-        //     if($senhaAluno == $request->password) {
-        //         $user = User::create([
-        //             'name' => $aluno->nome,
-        //             'email' => $aluno->cpf,
-        //             'password' => Hash::make($senhaAluno),
-        //             'role' => User::ROLE_ALUNO,
-        //             'ativo' => 1
-        //         ]);
-        
-        //     } else {
-        //         return new JsonResponse([
-        //             'message' => 'Usuário ou senha inválidos'.$senhaAluno
-        //         ], Response::HTTP_UNAUTHORIZED);
-        //     }
-            
-        // }
-
         if(!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Login ou senha incorreto'], 500);
         }
