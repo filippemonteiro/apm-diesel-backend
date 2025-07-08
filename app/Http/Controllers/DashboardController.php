@@ -1,18 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Carros;
-use App\Horarios;
 use App\Http\Controllers\Controller;
-use App\Models\Adverts;
-use App\Models\ImportsAdverts;
-use App\Models\Pedido;
-use App\Models\Products;
-use App\Rotas;
-use App\User;
-use Carbon\Carbon;
 use Exception;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class DashboardController extends Controller {
 
@@ -28,31 +18,11 @@ class DashboardController extends Controller {
 
             return response()->json([
                 'data' => [
-                    'total_clientes' => User::where('role', User::ADMINISTRADOR)->get()->count(),
-                    'total_usuarios' => User::when($user, function($query, $user) { 
-                        if($user->role != User::SUPERADMIN) {
-                            $query->where('cidade_id', $user->cidade_id);
-                        }
-                        return $query;
-                     })->get()->count(),
-                    'total_carros' => Carros::when($user, function($query, $user) { 
-                        if($user->role != User::SUPERADMIN) {
-                            $query->where('cidade_id', $user->cidade_id);
-                        }
-                        return $query;
-                     })->get()->count(),
-                    'total_horarios' => Horarios::when($user, function($query, $user) { 
-                        if($user->role != User::SUPERADMIN) {
-                            $query->where('cidade_id', $user->cidade_id);
-                        }
-                        return $query;
-                     })->get()->count(),
-                    'total_rotas' => Rotas::when($user, function($query, $user) { 
-                        if($user->role != User::SUPERADMIN) {
-                            $query->where('cidade_id', $user->cidade_id);
-                        }
-                        return $query;
-                     })->get()->count(),
+                    'total_clientes' => 0,
+                    'total_usuarios' => 0,
+                    'total_carros' => 0,
+                    'total_horarios' => 0,
+                    'total_rotas' => 0,
                 ]
             ]);
             
