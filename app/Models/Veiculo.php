@@ -15,7 +15,8 @@ class Veiculo extends Model
         'ano',
         'cor',
         'km',
-        'observacao'
+        'observacao',
+        'observacoes'
     ];
 
     protected $casts = [
