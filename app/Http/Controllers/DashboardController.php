@@ -20,14 +20,21 @@ class DashboardController extends Controller {
 
             $user = $request->user();
 
+            // totalVehicles: dashboardData.total_carros || 0,
+            // availableVehicles: dashboardData.carros_disponiveis || 0,
+            // inUseVehicles: dashboardData.carros_em_uso || 0,
+            // maintenanceVehicles: dashboardData.carros_manutencao || 0,
+            // totalUsers: dashboardData.total_usuarios || 0,
+            // pendingRequests: dashboardData.chamados_pendentes || 0,
+
             return response()->json([
                 'data' => [
-                    'total_veiculos' => Veiculo::get()->count(),
-                    'total_veiculos_disponiveis' => Veiculo::get()->count(),
-                    'total_veiculos_uso' => Reserva::whereNull('data_hora_checkout')->get()->count(),
-                    'total_veiculos_manutencao' => Reserva::whereNull('data_hora_checkout')->get()->count(),
+                    'total_carros' => Veiculo::get()->count(),
+                    'carros_disponiveis' => Veiculo::get()->count(),
+                    'carros_em_uso' => Reserva::whereNull('data_hora_checkout')->get()->count(),
+                    'carros_manutencao' => Reserva::whereNull('data_hora_checkout')->get()->count(),
                     'total_usuarios' => User::get()->count(),
-                    'total_chamados' => Reserva::get()->count(),
+                    'chamados_pendentes' => Reserva::get()->count(),
                 ]
             ]);
             
