@@ -25,7 +25,7 @@ class DashboardController extends Controller {
                     'total_veiculos' => Veiculo::get()->count(),
                     'total_veiculos_disponiveis' => Veiculo::get()->count(),
                     'total_veiculos_uso' => Reserva::whereNull('data_hora_checkout')->get()->count(),
-                    'total_veiculos_manutencao' => Reserva::whereIsNull('data_hora_checkout')->get()->count(),
+                    'total_veiculos_manutencao' => Reserva::whereNull('data_hora_checkout')->get()->count(),
                     'total_usuarios' => User::get()->count(),
                     'total_chamados' => Reserva::get()->count(),
                 ]
