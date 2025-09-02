@@ -15,10 +15,33 @@ class DatabaseSeeder extends Seeder
     {
 
         User::create([
-            'name' => 'Suporte Admin',
-            'email' => 'admin@admin.com.br',
-            'password' => Hash::make('Senh@123'),
+            'name' => 'Admin User',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('123456'),
             'role' => User::SUPERADMIN,
+        ]);
+
+        // Criar alguns veículos de teste
+        \App\Models\Veiculo::create([
+            'marca' => 'Toyota',
+            'modelo' => 'Corolla',
+            'placa' => 'ABC1234',
+            'ano' => 2020,
+            'cor' => 'Branco',
+            'km' => 50000,
+            'combustivel' => 'Flex',
+            'status' => 'disponivel'
+        ]);
+
+        \App\Models\Veiculo::create([
+            'marca' => 'Honda',
+            'modelo' => 'Civic',
+            'placa' => 'DEF5678',
+            'ano' => 2021,
+            'cor' => 'Preto',
+            'km' => 30000,
+            'combustivel' => 'Flex',
+            'status' => 'disponivel'
         ]);
         
     }

@@ -1,5 +1,8 @@
 <?php
 
+// Suprimir warnings de depreciação do PHP 8.1+ para compatibilidade com Laravel 8
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application

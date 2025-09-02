@@ -1,12 +1,14 @@
 <?php
 
-phpinfo();
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
+
+// Suprimir warnings de depreciação do PHP 8.1+ para compatibilidade com Laravel 8
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 define('LARAVEL_START', microtime(true));
 

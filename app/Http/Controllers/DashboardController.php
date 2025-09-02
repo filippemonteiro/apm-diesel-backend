@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Reserva;
 use App\Models\Veiculo;
+use App\Models\ServiceRequest;
 use App\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,31 +18,33 @@ class DashboardController extends Controller {
     */
     public function totais(Request $request) {
         try {
-
             $user = $request->user();
 
-            // totalVehicles: dashboardData.total_carros || 0,
-            // availableVehicles: dashboardData.carros_disponiveis || 0,
-            // inUseVehicles: dashboardData.carros_em_uso || 0,
-            // maintenanceVehicles: dashboardData.carros_manutencao || 0,
-            // totalUsers: dashboardData.total_usuarios || 0,
-            // pendingRequests: dashboardData.chamados_pendentes || 0,
+            // Contar veículos por status
+            $totalCarros = Veiculo::count();
+            $carrosDisponiveis = Veiculo::where('status', 'disponivel')->count();
+            $carrosEmUso = Veiculo::where('status', 'em_uso')->count();
+            $carrosManutencao = Veiculo::where('status', 'manutencao')->count();
+            
+            // Contar usuários
+            $totalUsuarios = User::count();
+            
+            // Contar chamados pendentes (serviços agendados)
+            $chamadosPendentes = ServiceRequest::where('status', 'AGENDADO')->count();
 
             return response()->json([
                 'data' => [
-                    'total_carros' => Veiculo::get()->count(),
-                    'carros_disponiveis' => Veiculo::get()->count(),
-                    'carros_em_uso' => Reserva::whereNull('data_hora_checkout')->get()->count(),
-                    'carros_manutencao' => Reserva::whereNull('data_hora_checkout')->get()->count(),
-                    'total_usuarios' => User::get()->count(),
-                    'chamados_pendentes' => Reserva::get()->count(),
+                    'total_carros' => $totalCarros,
+                    'carros_disponiveis' => $carrosDisponiveis,
+                    'carros_em_uso' => $carrosEmUso,
+                    'carros_manutencao' => $carrosManutencao,
+                    'total_usuarios' => $totalUsuarios,
+                    'chamados_pendentes' => $chamadosPendentes,
                 ]
             ]);
             
-           
         } catch(Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
-
         }
     }
 }

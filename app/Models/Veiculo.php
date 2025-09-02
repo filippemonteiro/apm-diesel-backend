@@ -17,11 +17,19 @@ class Veiculo extends Model
         'km',
         'observacao',
         'observacoes',
-        'combustivel'
+        'combustivel',
+        'status',
+        'currentUserId',
+        'odometer',
+        'fuelLevel',
+        'qrCode'
     ];
 
     protected $casts = [
-        'km' => 'integer'
+        'km' => 'integer',
+        'currentUserId' => 'integer',
+        'odometer' => 'integer',
+        'fuelLevel' => 'integer'
     ];
 
     // Relacionamentos
@@ -33,6 +41,21 @@ class Veiculo extends Model
     public function servicos()
     {
         return $this->hasMany(Servico::class, 'veiculo_id');
+    }
+
+    public function checkins()
+    {
+        return $this->hasMany(VehicleCheckin::class, 'vehicle_id');
+    }
+
+    public function checkouts()
+    {
+        return $this->hasMany(VehicleCheckout::class, 'vehicle_id');
+    }
+
+    public function serviceRequests()
+    {
+        return $this->hasMany(ServiceRequest::class, 'veiculo_id');
     }
 
     // Accessors

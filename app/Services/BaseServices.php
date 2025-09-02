@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BaseServices {
 
@@ -55,13 +56,21 @@ class BaseServices {
                 }
             }
             $this->user = $request->user();
-            $params = $this->beforeCreateData($request->all());
+            
+            // Validação de dados antes da criação
+            try {
+                $params = $this->beforeCreateData($request->all());
+            } catch(Exception $validationException) {
+                DB::rollBack();
+                return $this->response(['message' => $validationException->getMessage()], 422);
+            }
+            
             $this->params = $params;
             $data = $this->model->create($params);
             $this->afterCreateData($data);
             $data = $this->sanitizeDataCreate($data);
             DB::commit();
-            return $this->response(['message' => 'Registro Atualizado com Sucesso', 'data' => $data]);
+            return $this->response(['message' => 'Registro Criado com Sucesso', 'data' => $data]);
             
         } catch(Exception $e) {
             DB::rollBack();
@@ -83,14 +92,46 @@ class BaseServices {
                 }
             }
             $this->user = $request->user();
-            $params = $request->all();
-            $this->params = $params;
+            
+            // Capturar dados do JSON diretamente do raw input
+            $rawInput = $request->getContent();
+            
+            // Debug detalhado do JSON
+            Log::error('=== DEBUG JSON DECODE ===');
+            Log::error('Raw input: ' . $rawInput);
+            Log::error('Raw input length: ' . strlen($rawInput));
+            Log::error('JSON last error: ' . json_last_error_msg());
+            
+            $requestData = json_decode($rawInput, true);
+            
+            Log::error('Decoded data: ' . json_encode($requestData));
+            Log::error('JSON decode error after: ' . json_last_error_msg());
+            
+            // Se json_decode falhou, tentar $request->all() como fallback
+            if (json_last_error() !== JSON_ERROR_NONE || empty($requestData)) {
+                Log::error('JSON decode failed, using request->all()');
+                $requestData = $request->all();
+            }
+            
+            Log::error('Final request data: ' . json_encode($requestData));
+            Log::error('========================');
+            $this->params = $requestData;
             $data = $this->model->find($id);
+            
+            // Validação de dados antes da atualização
+            try {
+                $validatedData = $this->beforeUpdateData($requestData);
+            } catch(Exception $validationException) {
+                DB::rollBack();
+                return $this->response(['message' => $validationException->getMessage()], 422);
+            }
+            
+            $params = $validatedData;
             if(!isset($params['id'])) {
                 $params['id'] = $id;
             }
             $params['model'] = $data;
-            $params = $this->beforeUpdateData($params);
+            
             // $params = $this->update($params);
             $data->update($params);
             $this->afterUpdateData($data);
@@ -158,7 +199,7 @@ class BaseServices {
     }
     
     public function listOptions() {
-        $list = $this->repository->findAll();
+        $list = $this->model->all();
         $result = [];
         foreach($list as $item) {
             $result[$item->name] = $item->id;
