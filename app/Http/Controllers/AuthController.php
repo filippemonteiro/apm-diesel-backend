@@ -54,7 +54,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         
-        $user = User::whereRaw("email = '{$request->email}' OR cpf = '{$request->email}'")->first();
+        $user = User::where('email', $request->email)->first();
         if($user) {
             if(!in_array($user->role, ['1', '3'])) {
                 throw new Exception("Usuário sem permissão. Por favor, entre em contato com o Administrador");

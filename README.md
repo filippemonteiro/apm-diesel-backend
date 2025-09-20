@@ -1,52 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# APM Diesel Backend
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Sistema de gerenciamento de veículos e solicitações de serviços para APM Diesel.
 
-## About Laravel
+## Sobre o Projeto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este é o backend da aplicação APM Diesel, desenvolvido em Laravel 8, que oferece:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Gerenciamento de Veículos**: CRUD completo para veículos da frota
+- **Sistema de Check-in/Check-out**: Controle de uso dos veículos
+- **Solicitações de Serviços**: Gerenciamento de pedidos de combustível e manutenção
+- **Dashboard**: Relatórios e estatísticas em tempo real
+- **Autenticação**: Sistema seguro com Laravel Sanctum
+- **API RESTful**: Endpoints para integração com frontend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologias Utilizadas
 
-## Learning Laravel
+- **Laravel 8.83.29**
+- **PHP 8.4.12**
+- **MySQL**
+- **Laravel Sanctum** (Autenticação)
+- **CORS** configurado para frontend
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Configuração do Ambiente
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Pré-requisitos
 
-## Laravel Sponsors
+- PHP 8.1+ (recomendado)
+- Composer
+- MySQL/MariaDB
+- Node.js (opcional)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Instalação
 
-### Premium Partners
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   composer install
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+3. Configure o arquivo `.env`:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Contributing
+4. Configure o banco de dados no `.env`
+5. Execute as migrations:
+   ```bash
+   php artisan migrate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Inicie o servidor:
+   ```bash
+   php artisan serve --host=0.0.0.0 --port=9000
+   ```
+
+## Endpoints da API
+
+### Autenticação
+- `POST /api/login` - Login do usuário
+- `POST /api/me` - Dados do usuário autenticado
+
+### Veículos
+- `GET /api/veiculos` - Listar veículos
+- `POST /api/veiculos` - Criar veículo
+- `PUT /api/veiculos/{id}` - Atualizar veículo
+- `DELETE /api/veiculos/{id}` - Remover veículo
+
+### Check-in/Check-out
+- `POST /api/checkin` - Fazer check-in de veículo
+- `POST /api/checkout` - Fazer check-out de veículo
+
+### Solicitações de Serviços
+- `GET /api/servicos` - Listar solicitações
+- `POST /api/servicos` - Criar solicitação
+
+### Dashboard
+- `GET /api/dashboard/totais` - Estatísticas gerais
+
+## Credenciais de Teste
+
+- **Email**: `admin@admin.com`
+- **Senha**: `123456`
+
+## Status do Projeto
+
+✅ **Funcional e Operacional**
+
+- Todas as APIs implementadas e testadas
+- Autenticação funcionando
+- CORS configurado
+- Dashboard com dados consistentes
+- Sistema de check-in/check-out operacional
 
 ## Code of Conduct
 

@@ -1,15 +1,15 @@
 <?php
 
-use App\Models\Cargos;
-use App\Models\ModalidadesModel;
-use App\User;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class DatabaseSeeder extends Seeder
+class AdminUserSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com.br',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('123456'),
             'role' => '1',
+            'ativo' => 1
         ]);
     }
 }

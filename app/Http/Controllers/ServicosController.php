@@ -2,16 +2,149 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ServicosServices as Services;
+use App\Models\ServiceRequest;
+use App\Models\Veiculo;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Exception;
 
-class ServicosController extends ApiController 
+class ServicosController extends Controller
 {
-    protected $services = null;
-
-    public function __construct(Services $services) 
+    /**
+     * Listar solicitações de serviço com filtros
+     * GET /servicos
+     */
+    public function index(Request $request)
     {
-        $this->services = $services;
+        try {
+            $query = ServiceRequest::with(['veiculo', 'motorista']);
+
+            // Aplicar filtros
+            if ($request->has('motorista_id')) {
+                $query->where('motorista_id', $request->motorista_id);
+            }
+
+            if ($request->has('data_inicio')) {
+                $query->where('data', '>=', $request->data_inicio);
+            }
+
+            if ($request->has('data_fim')) {
+                $query->where('data', '<=', $request->data_fim);
+            }
+
+            if ($request->has('tipo')) {
+                $query->where('tipo', $request->tipo);
+            }
+
+            if ($request->has('veiculo_id')) {
+                $query->where('veiculo_id', $request->veiculo_id);
+            }
+
+            $servicos = $query->orderBy('data', 'desc')
+                            ->orderBy('hora', 'desc')
+                            ->get();
+
+            // Formatar resposta
+            $data = $servicos->map(function ($servico) {
+                return [
+                    'id' => $servico->id,
+                    'tipo' => $servico->tipo,
+                    'data' => $servico->data->format('Y-m-d'),
+                    'hora' => $servico->hora,
+                    'observacao' => $servico->observacao,
+                    'km' => $servico->km,
+                    'valor' => $servico->valor,
+                    'status' => $servico->status,
+                    'veiculo' => [
+                        'id' => $servico->veiculo->id,
+                        'marca' => $servico->veiculo->marca,
+                        'modelo' => $servico->veiculo->modelo,
+                        'cor' => $servico->veiculo->cor
+                    ],
+                    'motorista' => [
+                        'id' => $servico->motorista->id,
+                        'name' => $servico->motorista->name
+                    ]
+                ];
+            });
+
+            return response()->json([
+                'data' => $data
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Criar solicitação de serviço
+     * POST /servicos
+     */
+    public function store(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'tipo' => 'required|string|in:combustivel,manutencao',
+                'data' => 'required|date',
+                'hora' => 'required|date_format:H:i',
+                'observacao' => 'nullable|string',
+                'km' => 'required|string',
+                'valor' => 'required|numeric|min:0',
+                'veiculo_id' => 'required|exists:veiculos,id',
+                'motorista_id' => 'required|exists:users,id'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Dados inválidos',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+
+            $servico = ServiceRequest::create([
+                'tipo' => $request->tipo,
+                'data' => $request->data,
+                'hora' => $request->hora,
+                'observacao' => $request->observacao,
+                'km' => $request->km,
+                'valor' => $request->valor,
+                'status' => 'AGENDADO', // Status padrão
+                'veiculo_id' => $request->veiculo_id,
+                'motorista_id' => $request->motorista_id
+            ]);
+
+            // Carregar relacionamentos
+            $servico->load(['veiculo', 'motorista']);
+
+            return response()->json([
+                'message' => 'Serviço criado com sucesso',
+                'data' => [
+                    'id' => $servico->id,
+                    'tipo' => $servico->tipo,
+                    'data' => $servico->data->format('Y-m-d'),
+                    'hora' => $servico->hora,
+                    'observacao' => $servico->observacao,
+                    'km' => $servico->km,
+                    'valor' => $servico->valor,
+                    'status' => $servico->status,
+                    'veiculo' => [
+                        'id' => $servico->veiculo->id,
+                        'marca' => $servico->veiculo->marca,
+                        'modelo' => $servico->veiculo->modelo,
+                        'cor' => $servico->veiculo->cor
+                    ],
+                    'motorista' => [
+                        'id' => $servico->motorista->id,
+                        'name' => $servico->motorista->name
+                    ]
+                ]
+            ], 201);
+
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -20,7 +153,7 @@ class ServicosController extends ApiController
     public function porTipo($tipo, Request $request)
     {
         $request->merge(['tipo' => $tipo]);
-        return $this->services->index($request);
+        return $this->index($request);
     }
 
     /**
@@ -29,7 +162,7 @@ class ServicosController extends ApiController
     public function porMotorista($motoristaId, Request $request)
     {
         $request->merge(['motorista_id' => $motoristaId]);
-        return $this->services->index($request);
+        return $this->index($request);
     }
 
     /**
@@ -38,6 +171,6 @@ class ServicosController extends ApiController
     public function porVeiculo($veiculoId, Request $request)
     {
         $request->merge(['veiculo_id' => $veiculoId]);
-        return $this->services->index($request);
+        return $this->index($request);
     }
 }
