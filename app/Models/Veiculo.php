@@ -18,11 +18,11 @@ class Veiculo extends Model
         'observacao',
         'observacoes',
         'combustivel',
-        'status',
-        'currentUserId',
-        'odometer',
-        'fuelLevel',
-        'qrCode'
+        'status'
+        // 'currentUserId',
+        // 'odometer',
+        // 'fuelLevel',
+        // 'qrCode'
     ];
 
     protected $casts = [
