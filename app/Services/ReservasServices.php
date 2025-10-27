@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Reserva as Model;
+use Carbon\Carbon;
 use Exception;
 
 class ReservasServices extends BaseServices 
@@ -68,10 +69,6 @@ class ReservasServices extends BaseServices
 
     public function beforeCreateData($data)
     {
-        if(empty($data['data_hora_checkin'])) {
-            throw new Exception("O campo Data/Hora Check-in é obrigatório.");
-        }
-
         if(empty($data['motorista_id'])) {
             throw new Exception("O campo Motorista é obrigatório.");
         }
@@ -80,15 +77,16 @@ class ReservasServices extends BaseServices
             throw new Exception("O campo Veículo é obrigatório.");
         }
 
+        $dataHora = Carbon::now()->setTimezone('America/Sao_Paulo')->format('Y-m-d H:i:S');
+        $data['data_hora_checkin'] = $dataHora;
+
         return $data;
+
     }
 
     public function beforeUpdateData($data)
     {
-        if(empty($data['data_hora_checkin'])) {
-            throw new Exception("O campo Data/Hora Check-in é obrigatório.");
-        }
-
+        
         if(empty($data['motorista_id'])) {
             throw new Exception("O campo Motorista é obrigatório.");
         }
