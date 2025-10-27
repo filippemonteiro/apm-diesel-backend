@@ -77,7 +77,7 @@ class ReservasServices extends BaseServices
             throw new Exception("O campo Veículo é obrigatório.");
         }
 
-        $dataHora = Carbon::now()->setTimezone('America/Sao_Paulo')->format('Y-m-d H:i:S');
+        $dataHora = Carbon::now()->setTimezone('America/Sao_Paulo')->format('Y-m-d H:i:s');
         $data['data_hora_checkin'] = $dataHora;
 
         return $data;
