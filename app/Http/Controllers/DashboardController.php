@@ -23,7 +23,7 @@ class DashboardController extends Controller {
             // Contar veículos por status
             $totalCarros = Veiculo::count();
             $carrosDisponiveis = Veiculo::where('status', 'disponivel')->count();
-            $carrosEmUso = Veiculo::where('status', 'em_uso')->count();
+            $carrosEmUso = Reserva::where('data_hora_checkout', null)->count();
             $carrosManutencao = Veiculo::where('status', 'manutencao')->count();
             
             // Contar usuários
