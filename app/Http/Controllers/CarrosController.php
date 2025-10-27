@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Veiculo;
 use Illuminate\Http\Request;
 
 class CarrosController extends Controller
