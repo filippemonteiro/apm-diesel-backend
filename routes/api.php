@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Check-in/Check-out (API compatível com frontend)
     Route::post('frontend/checkin', 'CheckinFrontendController@checkin');
     Route::post('frontend/checkout', 'CheckinFrontendController@checkout');
+
+
+    Route::get(`carros/qr/{codigo}`, `CarrosController@getCarroBYcode`);
     
     // QR Code
     Route::post('qr-code/vehicle', 'QrCodeController@getVehicle');
