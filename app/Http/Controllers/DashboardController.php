@@ -30,7 +30,7 @@ class DashboardController extends Controller {
             $totalUsuarios = User::count();
             
             // Contar chamados pendentes (serviços agendados)
-            $chamadosPendentes = ServiceRequest::where('status', 'AGENDADO')->count();
+            // $chamadosPendentes = ServiceRequest::where('status', 'AGENDADO')->count();
 
             return response()->json([
                 'data' => [
@@ -39,7 +39,7 @@ class DashboardController extends Controller {
                     'carros_em_uso' => $carrosEmUso,
                     'carros_manutencao' => $carrosManutencao,
                     'total_usuarios' => $totalUsuarios,
-                    'chamados_pendentes' => $chamadosPendentes,
+                    'chamados_pendentes' => 0,
                 ]
             ]);
             
