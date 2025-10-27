@@ -27,9 +27,9 @@ class Veiculo extends Model
 
     protected $casts = [
         'km' => 'integer',
-        'currentUserId' => 'integer',
-        'odometer' => 'integer',
-        'fuelLevel' => 'integer'
+        // 'currentUserId' => 'integer',
+        // 'odometer' => 'integer',
+        // 'fuelLevel' => 'integer'
     ];
 
     // Relacionamentos
@@ -45,7 +45,7 @@ class Veiculo extends Model
 
     public function checkins()
     {
-        return $this->hasMany(VehicleCheckin::class, 'vehicle_id');
+        // return $this->hasMany(VehicleCheckin::class, 'vehicle_id');
     }
 
     public function checkouts()
