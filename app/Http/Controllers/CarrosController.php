@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class CarrosController extends Controller
 {
     public function getCarroBYcode($codigo) {
-        $data = Veiculo::where('qrCode', $codigo)->first();
+        $codigo = substr($codigo, -1);
+        $data = Veiculo::find($codigo);
         return response()->json($data);
     }
 }
