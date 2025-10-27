@@ -25,7 +25,7 @@ class VeiculosServices extends BaseServices
         $this->user = $request->user();
         
         $data = $this->model
-            ->select(['id', 'marca', 'modelo', 'placa', 'ano', 'cor', 'km', 'combustivel', 'status', 'observacao', 'observacoes', 'currentUserId', 'odometer', 'fuelLevel', 'qrCode', 'created_at', 'updated_at'])
+            ->select(['id', 'marca', 'modelo', 'placa', 'ano', 'cor', 'km', 'combustivel', 'status', 'observacao', 'observacoes', 'created_at', 'updated_at'])
             ->when($params, function($query, $params) {
                 if(isset($params['search'])) {
                     $query->where(function($q) use ($params) {
