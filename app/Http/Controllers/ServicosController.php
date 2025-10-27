@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reserva;
 use App\Models\ServiceRequest;
 use App\Models\Veiculo;
 use App\User;
@@ -18,59 +19,23 @@ class ServicosController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = ServiceRequest::with(['veiculo', 'motorista']);
+            $reservas = Reserva::when($request, function($query, $request) {
+                if ($request->has('motorista_id')) {
+                    $query->where('motorista_id', $request->motorista_id);
+                }
 
-            // Aplicar filtros
-            if ($request->has('motorista_id')) {
-                $query->where('motorista_id', $request->motorista_id);
-            }
+                if ($request->has('veiculo_id')) {
+                    $query->where('veiculo_id', $request->veiculo_id);
+                }
+                return $query;
+            })
+            ->orderBy('data_hora_checkin', 'desc')
+            ->paginate(10);
 
-            if ($request->has('data_inicio')) {
-                $query->where('data', '>=', $request->data_inicio);
-            }
-
-            if ($request->has('data_fim')) {
-                $query->where('data', '<=', $request->data_fim);
-            }
-
-            if ($request->has('tipo')) {
-                $query->where('tipo', $request->tipo);
-            }
-
-            if ($request->has('veiculo_id')) {
-                $query->where('veiculo_id', $request->veiculo_id);
-            }
-
-            $servicos = $query->orderBy('data', 'desc')
-                            ->orderBy('hora', 'desc')
-                            ->get();
-
-            // Formatar resposta
-            $data = $servicos->map(function ($servico) {
-                return [
-                    'id' => $servico->id,
-                    'tipo' => $servico->tipo,
-                    'data' => $servico->data->format('Y-m-d'),
-                    'hora' => $servico->hora,
-                    'observacao' => $servico->observacao,
-                    'km' => $servico->km,
-                    'valor' => $servico->valor,
-                    'status' => $servico->status,
-                    'veiculo' => [
-                        'id' => $servico->veiculo->id,
-                        'marca' => $servico->veiculo->marca,
-                        'modelo' => $servico->veiculo->modelo,
-                        'cor' => $servico->veiculo->cor
-                    ],
-                    'motorista' => [
-                        'id' => $servico->motorista->id,
-                        'name' => $servico->motorista->name
-                    ]
-                ];
-            });
+          
 
             return response()->json([
-                'data' => $data
+                'data' => $reservas
             ]);
 
         } catch (Exception $e) {
