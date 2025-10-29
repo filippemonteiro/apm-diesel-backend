@@ -25,21 +25,8 @@ Route::get('/relatorios-mobile', 'RelatoriosController@index');
 Route::group(['middleware' => ['auth:sanctum']], function () {
     
     Route::get('/relatorios', 'RelatoriosController@index');    
-        
-    // Check-in/Check-out (API original)
-    Route::post('checkin', 'CheckinController@checkin');
-    Route::post('checkout', 'CheckinController@checkout');
-    
-    // Check-in/Check-out (API compatível com frontend)
-    Route::post('frontend/checkin', 'CheckinFrontendController@checkin');
-    Route::post('frontend/checkout', 'CheckinFrontendController@checkout');
-
-
     Route::get('carros/qr/{codigo}', 'CarrosController@getCarroBYcode');
-    
-    // QR Code
-    Route::post('qr-code/vehicle', 'QrCodeController@getVehicle');
-    
+
     // Options
     Route::get('users/options', "UsersController@options");
     Route::post('logout-user', 'AuthController@desconectDevice');
@@ -61,16 +48,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('servicos/motorista/{motoristaId}', 'ServicosController@porMotorista');
     Route::get('servicos/veiculo/{veiculoId}', 'ServicosController@porVeiculo');
 
-    // === VEHICLE CHECK-IN/CHECK-OUT SYSTEM ===
-    Route::post('vehicles/checkin', 'VehicleCheckinController@checkin');
-    Route::post('vehicles/checkout', 'VehicleCheckinController@checkout');
-    Route::get('vehicles/checkin-history', 'VehicleCheckinController@checkinHistory');
-    Route::get('vehicles/checkout-history', 'VehicleCheckinController@checkoutHistory');
-
-    // === SERVICE REQUESTS SYSTEM ===
-    Route::get('service-requests/statistics', 'ServiceRequestController@statistics');
-    Route::resource('service-requests', 'ServiceRequestController');
-
     // CRUD Resources - SISTEMA DE VEÍCULOS
     Route::resource('usuarios', 'UsersController');
     Route::resource('veiculos', 'VeiculosController');
@@ -78,7 +55,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('reservas', 'ReservasController');
     Route::resource('servicos', 'ServicosController');
 });
-
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

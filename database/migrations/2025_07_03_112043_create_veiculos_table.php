@@ -18,8 +18,16 @@ class CreateVeiculosTable extends Migration
             $table->string('marca');
             $table->string('modelo');
             $table->string('cor');
-            $table->integer('km')->default(0);
+            $table->decimal('km')->default(0);
+
+            $table->string('placa', 10)->after('id')->unique();
+            $table->year('ano')->after('placa');
+
             $table->text('observacao')->nullable();
+            $table->text('observacoes')->nullable();
+
+            $table->string('combustivel')->nullable()->after('observacoes');
+            $table->string('status')->default('disponivel')->after('combustivel');
             $table->timestamps();
         });
     }

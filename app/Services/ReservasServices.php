@@ -19,6 +19,52 @@ class ReservasServices extends BaseServices
         $this->orderBy = 'desc';
     }
 
+    public function checkIn($request) {
+        try{
+            DB::beginTransaction();
+            $this->user = $request->user();
+
+            $request->validate([
+                'motorista_id' => 'required',
+                'veiculo_id' => 'required',
+                'km' => 'required'
+            ]);
+            
+            $params['data_hora_checkin'] = Carbon::now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s');
+            $data = $this->model->create($params);
+      
+            $data = $this->sanitizeDataCreate($data);
+            DB::commit();
+            return $this->response(['message' => 'CheckIn Realizado com Sucesso', 'data' => $data]);
+            
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->response(['message' => $e->getMessage()], 500);
+        }
+    }
+
+     public function checkOut($request) {
+        try{
+            DB::beginTransaction();
+            $this->user = $request->user();
+            
+            $request->validate([
+                'id' => 'required',
+                'km' => 'required'
+            ]);
+            $data = $this->model->find($params['id']);
+            $params['data_hora_checkout'] = Carbon::now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s');
+            $data = $data->update($params);
+    
+            $data = $this->sanitizeDataCreate($data);
+            DB::commit();
+            return $this->response(['message' => 'CheckOut Realizado com Sucesso', 'data' => $data]);
+            
+        } catch(Exception $e) {
+            DB::rollBack();
+            return $this->response(['message' => $e->getMessage()], 500);
+        }
+    }
     public function index($request) 
     {
         $params = $request->all();

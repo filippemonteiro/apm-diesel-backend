@@ -19,7 +19,7 @@ class CreateServicosTable extends Migration
             $table->date('data');
             $table->time('hora');
             $table->text('observacao')->nullable();
-            $table->integer('km')->default(0);
+            $table->decimal('km')->default(0);
             $table->decimal('valor', 10, 2)->default(0);
             $table->unsignedBigInteger('motorista_id');
             $table->unsignedBigInteger('veiculo_id');

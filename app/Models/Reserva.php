@@ -10,6 +10,7 @@ class Reserva extends Model
     protected $table = "reservas";
     
     protected $fillable = [
+        'id',
         'data_hora_checkin',
         'data_hora_checkout',
         'motorista_id',
@@ -48,4 +49,5 @@ class Reserva extends Model
         }
         return null;
     }
+
 }

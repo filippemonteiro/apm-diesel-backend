@@ -16,17 +16,8 @@ class User extends Authenticatable  implements JWTSubject
     const STATUS_ATIVO = 1;
     const STATUS_INATIVO = 0;
 
-    const ROLE_ADMIN = 1;
-    const ROLE_ALUNO = 2;
-
-
-    const SUPERADMIN = 1;
-    const ADMINISTRADOR = 2;
-    const OPERADOR = 3;
-    const MOTORISTA = 4;
-    const PUBLICO = 5;
-
-   
+    const ROLE_ADMIN = 1; // Admin
+    const ROLE_MOTORISTA = 2; // Motorista
 
     /**
      * The attributes that are mass assignable.
@@ -61,22 +52,16 @@ class User extends Authenticatable  implements JWTSubject
 
     public static function getTypeRole($type) {
         $list =  [
-            1 => 'SuperAdmin',
-            2 => 'Administrador',
-            3 => 'Operador',
-            4 => 'Motorista',
-            5 => 'Publico'
+            1 => 'Administrador',
+            2 => 'Motorista'
         ];
         return isset($list[$type])? $list[$type] : 'Desconhecido';
     }
 
     public static function getTypes() {
         $list =  [
-            1 => 'SuperAdmin',
-            2 => 'Administrador',
-            3 => 'Operador',
-            4 => 'Motorista',
-            5 => 'Publico'
+            1 => 'Administrador',
+            2 => 'Motorista'
         ];
         return $list;
     }

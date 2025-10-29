@@ -19,7 +19,7 @@ class CreateReservasTable extends Migration
             $table->dateTime('data_hora_checkout')->nullable();
             $table->unsignedBigInteger('motorista_id');
             $table->unsignedBigInteger('veiculo_id');
-            $table->integer('km')->default(0);
+            $table->decimal('km')->default(0);
             $table->text('observacao')->nullable();
             $table->timestamps();
 
