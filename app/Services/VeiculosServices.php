@@ -25,7 +25,6 @@ class VeiculosServices extends BaseServices
         $this->user = $request->user();
         
         $data = $this->model
-            ->select(['id', 'marca', 'modelo', 'placa', 'ano', 'cor', 'km', 'combustivel', 'status', 'observacao', 'observacoes', 'created_at', 'updated_at'])
             ->when($params, function($query, $params) {
                 if(isset($params['search'])) {
                     $query->where(function($q) use ($params) {
@@ -51,6 +50,69 @@ class VeiculosServices extends BaseServices
         return $this->response($data);
     }
 
+    public function listarDisponiveis($request) 
+    {
+        $params = $request->all();
+        $this->user = $request->user();
+        
+        $data = $this->model
+            ->when($params, function($query, $params) {
+                if(isset($params['search'])) {
+                    $query->where(function($q) use ($params) {
+                        $q->where('marca', 'like', "%{$params['search']}%")
+                        ->orWhere('modelo', 'like', "%{$params['search']}%")
+                        ->orWhere('cor', 'like', "%{$params['search']}%");
+                    });
+                }
+                return $query;
+            })
+            ->when($this->orderBy, function($query, $orderBy) {
+                if($orderBy === 'desc') {
+                    return $query->orderBy('id', 'desc');
+                }
+                return $query->orderBy('marca', 'asc');
+            })
+            ->where('status', 'disponivel')
+            ->paginate(10);
+
+        foreach($data as $item) {
+            $item->descricao_completa;
+        }
+
+        return $this->response($data);
+    }
+
+    public function listarNaoDisponiveis($request) 
+    {
+        $params = $request->all();
+        $this->user = $request->user();
+        
+        $data = $this->model
+            ->when($params, function($query, $params) {
+                if(isset($params['search'])) {
+                    $query->where(function($q) use ($params) {
+                        $q->where('marca', 'like', "%{$params['search']}%")
+                        ->orWhere('modelo', 'like', "%{$params['search']}%")
+                        ->orWhere('cor', 'like', "%{$params['search']}%");
+                    });
+                }
+                return $query;
+            })
+            ->when($this->orderBy, function($query, $orderBy) {
+                if($orderBy === 'desc') {
+                    return $query->orderBy('id', 'desc');
+                }
+                return $query->orderBy('marca', 'asc');
+            })
+            ->where('status', '<>', 'disponivel')
+            ->paginate(10);
+
+        foreach($data as $item) {
+            $item->descricao_completa;
+        }
+
+        return $this->response($data);
+    }
     public function show($id) 
     {
         $data = $this->model->with(['reservas.motorista', 'servicos'])

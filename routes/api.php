@@ -48,6 +48,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('servicos/motorista/{motoristaId}', 'ServicosController@porMotorista');
     Route::get('servicos/veiculo/{veiculoId}', 'ServicosController@porVeiculo');
 
+    
+    Route::get('veiculos/disponiveis', 'VeiculosController@listaDisponiveis');
+    Route::get('veiculos/nao-disponiveis', 'VeiculosController@listaNaoDisponiveis');
+
     // CRUD Resources - SISTEMA DE VEÍCULOS
     Route::resource('usuarios', 'UsersController');
     Route::resource('veiculos', 'VeiculosController');
