@@ -88,6 +88,10 @@ class ReservasServices extends BaseServices
                     $query->where('motorista_id', $params['motorista_id']);
                 }
 
+                if(isset($params['abertas'])) {
+                    $query->whereIsNull('data_hora_checkout');
+                }
+
                 if(isset($params['veiculo_id'])) {
                     $query->where('veiculo_id', $params['veiculo_id']);
                 }
