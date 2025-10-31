@@ -30,7 +30,7 @@ class ReservasServices extends BaseServices
                 'veiculo_id' => 'required',
                 'km' => 'required'
             ]);
-            
+            $params = $request->all();
             $params['data_hora_checkin'] = Carbon::now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s');
             $data = $this->model->create($params);
       
