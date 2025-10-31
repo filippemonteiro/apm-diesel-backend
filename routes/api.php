@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('servicos/motorista/{motoristaId}', 'ServicosController@porMotorista');
     Route::get('servicos/veiculo/{veiculoId}', 'ServicosController@porVeiculo');
 
+    Route::post('reservas/checkin', 'ReservasController@checkIn');
+    Route::put('reservas/checkout', 'ReservasController@checkOut');
     
     Route::get('veiculos/disponiveis', 'VeiculosController@listaDisponiveis');
     Route::get('veiculos/nao-disponiveis', 'VeiculosController@listaNaoDisponiveis');

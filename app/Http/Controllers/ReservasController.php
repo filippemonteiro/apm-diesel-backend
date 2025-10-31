@@ -14,6 +14,14 @@ class ReservasController extends ApiController
         $this->services = $services;
     }
 
+    public function checkIn(Request $request) {
+        return $this->services->checkIn($request);
+    }
+
+    public function checkOut(Request $request) {
+        return $this->services->checkOut($request);
+    }
+
     /**
      * Listar reservas por motorista
      */

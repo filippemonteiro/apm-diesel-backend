@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Reserva as Model;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ReservasServices extends BaseServices 
 {
@@ -43,7 +44,7 @@ class ReservasServices extends BaseServices
         }
     }
 
-     public function checkOut($request) {
+    public function checkOut($request) {
         try{
             DB::beginTransaction();
             $this->user = $request->user();
@@ -65,6 +66,7 @@ class ReservasServices extends BaseServices
             return $this->response(['message' => $e->getMessage()], 500);
         }
     }
+    
     public function index($request) 
     {
         $params = $request->all();
