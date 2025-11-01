@@ -51,7 +51,6 @@ class ReservasServices extends BaseServices
             
             $request->validate([
                 'id' => 'required',
-                'km' => 'required'
             ]);
             $data = $this->model->find($params['id']);
             $params['data_hora_checkout'] = Carbon::now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s');
