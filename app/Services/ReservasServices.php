@@ -52,12 +52,12 @@ class ReservasServices extends BaseServices
             $request->validate([
                 'id' => 'required',
             ]);
-            $params = $request->all()
+            $params = $request->all();
             $data = $this->model->find($params['id']);
             $params['data_hora_checkout'] = Carbon::now()->setTimezone('America/Sao_Paulo')->format('d-m-Y H:i:s');
             $data = $data->update($params);
     
-            $data = $this->sanitizeDataCreate($data);
+        
             DB::commit();
             return $this->response(['message' => 'CheckOut Realizado com Sucesso', 'data' => $data]);
             
