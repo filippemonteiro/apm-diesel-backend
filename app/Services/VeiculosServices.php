@@ -142,10 +142,6 @@ class VeiculosServices extends BaseServices
             throw new Exception("O campo Ano é obrigatório.");
         }
 
-        if(empty($data['qrCode'])) {
-            throw new Exception("O campo QR Code é obrigatório.");
-        }
-
         // Verificar se a placa já existe
         $existingVeiculo = $this->model->where('placa', $data['placa'])->first();
         if($existingVeiculo) {
@@ -158,13 +154,13 @@ class VeiculosServices extends BaseServices
     public function beforeUpdateData($data)
     {
         // Log detalhado para debug
-        Log::error('=== DEBUG ATUALIZAÇÃO VEÍCULO ===');
-        Log::error('Dados brutos recebidos: ' . json_encode($data));
-        Log::error('Tipo de dados: ' . gettype($data));
-        Log::error('Chaves disponíveis: ' . json_encode(array_keys($data)));
-        Log::error('Valor marca: ' . json_encode($data['marca'] ?? 'CHAVE_NAO_EXISTE'));
-        Log::error('Marca está vazia? ' . (empty($data['marca']) ? 'SIM' : 'NÃO'));
-        Log::error('================================');
+        // Log::error('=== DEBUG ATUALIZAÇÃO VEÍCULO ===');
+        // Log::error('Dados brutos recebidos: ' . json_encode($data));
+        // Log::error('Tipo de dados: ' . gettype($data));
+        // Log::error('Chaves disponíveis: ' . json_encode(array_keys($data)));
+        // Log::error('Valor marca: ' . json_encode($data['marca'] ?? 'CHAVE_NAO_EXISTE'));
+        // Log::error('Marca está vazia? ' . (empty($data['marca']) ? 'SIM' : 'NÃO'));
+        // Log::error('================================');
         
         if (empty($data['marca'])) {
             throw new \Exception('O campo Marca é obrigatório.');
